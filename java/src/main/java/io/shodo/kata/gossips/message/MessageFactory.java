@@ -38,7 +38,7 @@ public class MessageFactory implements Visitor {
         Person to = professor.confident();
         if(to != null && !professor.dumpMemory().equals("")) {
             Message content = professor.lastConfidence();
-            if(Tic.INSTANCE.getTic()-content.tic()>2) {
+            if(Tic.INSTANCE.getTic()-content.tic()>1) {
                 messages.add(new Message(professor, to, content.content()));
                 professor.forget();
             }

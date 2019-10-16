@@ -52,7 +52,6 @@ class Gossips {
     }
 
     void spread() {
-        Tic.INSTANCE.nextTic();
         for (Person origin : this.people.values()) {
             inbox.pull(origin);
         }
