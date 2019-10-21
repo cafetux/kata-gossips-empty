@@ -9,7 +9,7 @@ import java.util.*;
 class Gossips {
 
     private final Map<String, Person> people = new HashMap<>();
-    private MessageInbox inbox = new MessageInbox();
+    private MessageInbox inbox;
 
 
     Gossips(String... names) {
@@ -18,6 +18,7 @@ class Gossips {
                 .map(this::create)
                 .peek(person -> people.put(person.name(),person))
                 .forEach(Tic.INSTANCE::abonne);
+        inbox = new MessageInbox(people.values());
     }
 
     private Person create(String[] person) {
@@ -52,10 +53,7 @@ class Gossips {
     }
 
     void spread() {
-        for (Person origin : this.people.values()) {
-            inbox.pull(origin);
-        }
-        inbox.sync();
+        inbox.spread();
     }
 
     public class PersonRelationStep {
